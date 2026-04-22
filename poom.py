@@ -18,7 +18,7 @@ sun = Entity(model='cube', texture='textures/sun.png', scale=109, collider='box'
 
 
 def update():
-
+    global speed
     #earth
     earthangle = speed * time.dt
     earthradius = 15
