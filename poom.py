@@ -13,7 +13,7 @@ ec = EditorCamera()
 
 #planets
 earth = Entity(model='cube', texture='textures/earth.png', scale=1, collider='box')
-moon = Entity(model='cube', texture='textures/mars.png', scale=0.27, collider='box')
+moon = Entity(model='cube', texture='textures/moon.png', scale=0.27, collider='box')
 sun = Entity(model='cube', texture='textures/sun.png', scale=109, collider='box', position=(0,0,0))
 mars = Entity(model='cube', texture='textures/mars.png', scale=0.5, collider='box')
 
