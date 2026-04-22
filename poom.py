@@ -34,13 +34,12 @@ def update():
 
 def input(key):
     if key == '1':
-        #ec.position = earth.position
-        pass
+        ec.position = earth.position
     elif key == "2":
         #ec.position = mars.position
         pass
         
         
-
+ec.position = earth.position
 app.run()
 
