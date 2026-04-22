@@ -30,8 +30,8 @@ def update():
     moonangle += speed * time.dt
     moonradius = 15
     moon.rotation_y += time.dt * 15
-    moon.x = math.cos(moonangle) * moonradius
-    moon.z = math.sin(moonangle) * moonradius
+    moon.x = earth.x + math.cos(moonangle) * moonradius
+    moon.z = earth.z + math.sin(moonangle) * moonradius
 
     
     marsangle += speed * 0.9 * time.dt
