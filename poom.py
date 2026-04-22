@@ -7,6 +7,8 @@ window.exit_button.visible = False
 window.fps_counter.enabled = True
 window.color = color.black
 
+speed = 15
+
 ec = EditorCamera()
 
 #planets
@@ -16,7 +18,15 @@ sun = Entity(model='cube', texture='textures/sun.png', scale=109, collider='box'
 
 
 def update():
+
+    #earth
+    earthangle = speed * time.dt
     earth.rotation_y += time.dt * 15
+    earth.x = math.cos(angle) * radius
+    earth.z = math.sin(angle) * radius
+
+    
+    
     mars.rotation_y += time.dt * 14.5
 
 
