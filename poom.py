@@ -1,0 +1,32 @@
+from ursina import *
+
+app = Ursina()
+
+window.title = 'My Game'
+window.exit_button.visible = False
+window.fps_counter.enabled = True
+window.color = color.black
+
+ec = EditorCamera()
+
+#planets
+earth = Entity(model='cube', texture='textures/earth.png', scale=1, collider='box', position=(0,0,0))
+mars = Entity(model='cube', texture='textures/mars.png', scale=0.5, collider='box', position=(150,150,0))
+
+
+def update():
+    earth.rotation_y += time.dt * 15
+    mars.rotation_y += time.dt * 14.5
+
+
+
+def input(key):
+    if key == '1':
+        ec.position = earth.position
+    elif key == "2":
+        ec.position = mars.position
+        
+        
+
+app.run()
+
