@@ -21,20 +21,20 @@ mars = Entity(model='cube', texture='textures/mars.png', scale=0.5, collider='bo
 def update():
     global speed
     #earth
-    earthangle = speed * time.dt
+    earthangle += speed * time.dt
     earthradius = 15
     earth.rotation_y += time.dt * 15
     earth.x = math.cos(earthangle) * earthradius
     earth.z = math.sin(earthangle) * earthradius
 
-    moonangle = speed * time.dt
+    moonangle += speed * time.dt
     moonradius = 15
     moon.rotation_y += time.dt * 15
     moon.x = math.cos(moonangle) * moonradius
     moon.z = math.sin(moonangle) * moonradius
 
     
-    marsangle = speed * 0.9 * time.dt
+    marsangle += speed * 0.9 * time.dt
     marsradius = 25
     mars.rotation_y += time.dt * 14
     mars.x = math.cos(marsangle) * marsradius
