@@ -21,9 +21,10 @@ def update():
 
     #earth
     earthangle = speed * time.dt
+    earthradius = 15
     earth.rotation_y += time.dt * 15
-    earth.x = math.cos(earthangle) * radius
-    earth.z = math.sin(earthangle) * radius
+    earth.x = math.cos(earthangle) * earthradius
+    earth.z = math.sin(earthangle) * earthradius
 
     
     
