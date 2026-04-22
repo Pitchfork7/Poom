@@ -27,8 +27,11 @@ def update():
     earth.z = math.sin(earthangle) * earthradius
 
     
-    
-    mars.rotation_y += time.dt * 14.5
+    marsangle = speed * 0.9 * time.dt
+    marsradius = 15
+    mars.rotation_y += time.dt * 25
+    mars.x = math.cos(earthangle) * marsradius
+    mars.z = math.sin(earthangle) * marsradius
 
 
 
