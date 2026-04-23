@@ -33,10 +33,10 @@ class planet:
 
 
 # planets
-earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0))
-moon = planet("Moon", 4.54, "textures/moon .png", 0.54, (0,0,0))
+earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0), 300, sun.ob)
+moon = planet("Moon", 4.54, "textures/moon .png", 0.54, (0,0,0), 5, earth.ob)
 sun = Entity(model='cube', texture='textures/sun.png', scale=109, collider='box', position=(0,0,0))
-mars = planet("Mars", 4.54, "textures/mars.png", 1, (0,0,0))
+mars = planet("Mars", 4.54, "textures/mars.png", 1, (0,0,0), 500, sun.ob)
 
 earthangle = 0
 moonangle = 0
