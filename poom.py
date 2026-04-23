@@ -14,7 +14,7 @@ platar = 1
 ec = EditorCamera()
 
 class planet:
-    def __init__(self, name, age, texture, scale, pos, rad, orbtarget, rospeed):
+    def __init__(self, name, age, texture, scale, pos, rad, orbtarget, rospeed, orbspeed):
         self.name = name
         self.age = age
         self.texture = texture
@@ -27,17 +27,19 @@ class planet:
         self.planetradius = rad
         self.planetangle = 0
         self.orbtarget = orbtarget
+        self.orbspeed = orbspeed
     def planorbit():
-        self.planetangle += speed * time.dt
+        self.planetangle += self.orbspeed * time.dt
         self.ob.rotation_y += time.dt * self.rospeed
         self.ob.position = orbit(self.planetangle, self.planetradius, self.orbtarget)
 
 
 # planets
-earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0), 300, sun, 15)
-moon = planet("Moon", 4.54, "textures/moon .png", 0.54, (0,0,0), 5, earth.ob, 5)
+earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0), 300, sun, 15, 1)
+moon = planet("Moon", 4.54, "textures/moon .png", 0.54, (0,0,0), 5, earth.ob, 5, 2)
 sun = Entity(model='cube', texture='textures/sun.png', scale=109, collider='box', position=(0,0,0))
-mars = planet("Mars", 4.54, "textures/mars.png", 1, (0,0,0), 500, sun, 14)
+mars = planet("Mars", 4.54, "textures/mars.png", 1, (0,0,0), 500, sun, 14, 0.9)
+venus = planet("venus",4.54, "textures/venus.png", 2, (0,0,0), 200, sun, 20, 1.5)
 
 earthangle = 0
 moonangle = 0
@@ -60,6 +62,7 @@ def update():
     earth.planorbit()
     moon.planorbit()
     mars.planorbit()
+    venus.planorbit()
 
 def input(key):
     global platar
