@@ -14,7 +14,11 @@ speed = 1
 platar = 0
 planetlist = []
 
+#camera
 ec = EditorCamera()
+
+#ui
+planetlabel = Text(text= "Planet", position = (-0.5,0.4), scale = 2, color = color.white)
 
 #planet class
 class planet:
@@ -58,13 +62,17 @@ def update():
     # cam pos
     if platar == 1:
         target_pos = earth.ob.position
+        planetlabel.text = "Earth"
     elif platar == 2:
         target_pos = mars.ob.position
+        planetlabel.text = "Mars"
     elif platar == 0:
         if sun:
             target_pos = sun.position
+            planetlabel.text = "System"
         else:
             target_pos = (0,0,0)
+            planetlabel.text = "Starless System"
 
     ec.position = lerp(ec.position, target_pos, 0.5)
 
