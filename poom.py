@@ -1,12 +1,14 @@
 from ursina import *
 import math
-
+#app seetings
 app = Ursina()
 
 window.title = 'Poom'
 window.exit_button.visible = False
 window.fps_counter.enabled = True
 window.color = color.black
+
+#vars
 
 speed = 1
 platar = 1
@@ -34,19 +36,16 @@ class planet:
         self.ob.position = orbit(self.planetangle, self.planetradius, self.orbtarget)
 
 
-# planets
+# define planets
 earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0), 300, sun, 15, 1)
 moon = planet("Moon", 4.54, "textures/moon .png", 0.54, (0,0,0), 5, earth.ob, 5, 2)
 sun = Entity(model='cube', texture='textures/sun.png', scale=109, collider='box', position=(0,0,0))
 mars = planet("Mars", 4.54, "textures/mars.png", 1, (0,0,0), 500, sun, 14, 0.9)
 venus = planet("venus",4.54, "textures/venus.png", 2, (0,0,0), 200, sun, 20, 1.5)
 
-earthangle = 0
-moonangle = 0
-marsangle = 0
 
 def update():
-    global speed, earthangle, moonangle, marsangle, platar
+    global speed, platar
 
     # cam pos
     if platar == 1:
@@ -64,15 +63,17 @@ def update():
     mars.planorbit()
     venus.planorbit()
 
+    #inputs
 def input(key):
     global platar
+    #set plantar to correct number for cam pos
     if key == '1':
         platar = 1
     elif key == "2":
         platar = 2
     elif key == "0":
         platar = 0
-
+#orbit func
 def orbit(angle, radius, target):
     return target.position + Vec3(math.cos(angle) * radius, 0, math.sin(angle) * radius)
 
