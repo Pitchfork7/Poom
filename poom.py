@@ -14,7 +14,7 @@ platar = 1
 ec = EditorCamera()
 
 class planet:
-    def __init__(self, name, age, texture, scale, pos):
+    def __init__(self, name, age, texture, scale, pos, rad):
         self.name = name
         self.age = age
         self.texture = texture
@@ -22,6 +22,14 @@ class planet:
         self.pos = pos
         
         self.ob = Entity(model='cube', texture= self.texture, scale= self.scale, collider='box', position = self.pos)
+
+        self.planetradius = rad
+    def planorbit():
+        self.planetangle += speed * time.dt
+        self.ob.rotation_y += time.dt * 15
+        self.ob.position = orbit(self.planetangle, self.planetradius, sun)
+
+
 # planets
 earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0))
 moon = planet("Moon", 4.54, "textures/moon .png", 0.54, (0,0,0))
