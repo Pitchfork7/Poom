@@ -12,6 +12,7 @@ window.color = color.black
 
 speed = 1
 platar = 0
+planetlist = []
 
 ec = EditorCamera()
 
@@ -43,6 +44,8 @@ class planet:
 
 # define planets
 sun = Entity(model='cube', texture='textures/sun.png', scale=109, collider='box', position=(0,0,0))
+
+
 earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0), 500, sun, 15, 1)
 moon = planet("Moon", 4.54, "textures/moon.png", 0.54, (0,0,0), 5, earth.ob, 5, 2)
 mars = planet("Mars", 4.54, "textures/mars.png", 1, (0,0,0), 700, sun, 14, 0.9)
