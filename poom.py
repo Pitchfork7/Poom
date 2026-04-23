@@ -31,18 +31,18 @@ class planet:
         self.planetangle = 0
         self.orbtarget = orbtarget
         self.orbspeed = orbspeed
-    def planorbit():
+    def planorbit(self):
         self.planetangle += self.orbspeed * time.dt
         self.ob.rotation_y += time.dt * self.rospeed
         self.ob.position = orbit(self.planetangle, self.planetradius, self.orbtarget)
 
 
 # define planets
-earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0), 300, sun, 15, 1)
-moon = planet("Moon", 4.54, "textures/moon .png", 0.54, (0,0,0), 5, earth.ob, 5, 2)
 sun = Entity(model='cube', texture='textures/sun.png', scale=109, collider='box', position=(0,0,0))
-mars = planet("Mars", 4.54, "textures/mars.png", 1, (0,0,0), 500, sun, 14, 0.9)
-venus = planet("venus",4.54, "textures/venus.png", 2, (0,0,0), 200, sun, 20, 1.5)
+earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0), 500, sun, 15, 1)
+moon = planet("Moon", 4.54, "textures/moon.png", 0.54, (0,0,0), 5, earth.ob, 5, 2)
+mars = planet("Mars", 4.54, "textures/mars.png", 1, (0,0,0), 700, sun, 14, 0.9)
+venus = planet("venus",4.54, "textures/venus.png", 2, (0,0,0), 300, sun, 20, 1.5)
 
 
 def update():
@@ -50,11 +50,13 @@ def update():
 
     # cam pos
     if platar == 1:
-        ec.position = earth.ob.position + Vec3(0, 10, -20)
+        target_pos = earth.ob.position
     elif platar == 2:
-        ec.position = mars.ob.position + Vec3(0, 10, -20)
+        target_pos = mars.ob.position
     elif platar == 0:
-        ec.position = sun.position
+        target_pos = sun.position
+
+    ec.position = lerp(ec.position, target_pos, 0.3)
 
     sun.rotation_y += time.dt * 3
 
