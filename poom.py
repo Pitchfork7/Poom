@@ -1,55 +1,76 @@
 from ursina import *
+import math
 
 app = Ursina()
 
-window.title = 'My Game'
+window.title = 'Poom'
 window.exit_button.visible = False
 window.fps_counter.enabled = True
 window.color = color.black
 
 speed = 1
+platar = 1
 
 ec = EditorCamera()
 
-#planets
-earth = Entity(model='cube', texture='textures/earth.png', scale=1, collider='box')
-moon = Entity(model='cube', texture='textures/moon.png', scale=0.27, collider='box')
+class planet:
+    def __init__(self, name, age, texture, scale, pos):
+        self.name = name
+        self.age = age
+        self.texture = texture
+        self.scale = scale
+        self.pos = pos
+        
+        self.ob = Entity(model='cube', texture= self.texture, scale= self.scale, collider='box', position = self.pos)
+# planets
+earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0))
+moon = planet("Moon", 4.54, "textures/moon .png", 0.54, (0,0,0))
 sun = Entity(model='cube', texture='textures/sun.png', scale=109, collider='box', position=(0,0,0))
-mars = Entity(model='cube', texture='textures/mars.png', scale=0.5, collider='box')
+mars = planet("Mars", 4.54, "textures/mars.png", 1, (0,0,0))
 
+earthangle = 0
+moonangle = 0
+marsangle = 0
 
 def update():
-    global speed
-    #earth
+    global speed, earthangle, moonangle, marsangle, platar
+
+    # cam pos
+    if platar == 1:
+        ec.position = earth.ob.position + Vec3(0, 10, -20)
+    elif platar == 2:
+        ec.position = mars.ob.position + Vec3(0, 10, -20)
+    elif platar == 0:
+        ec.position = sun.position
+
+    sun.rotation_y += time.dt * 3
+
+    # earth
     earthangle += speed * time.dt
-    earthradius = 15
-    earth.rotation_y += time.dt * 15
-    earth.x = math.cos(earthangle) * earthradius
-    earth.z = math.sin(earthangle) * earthradius
+    earthradius = 300
+    earth.ob.rotation_y += time.dt * 15
+    earth.ob.position = orbit(earthangle, earthradius, sun)
 
     moonangle += speed * time.dt
-    moonradius = 15
-    moon.rotation_y += time.dt * 7
-    moon.x = earth.x + math.cos(moonangle) * moonradius
-    moon.z = earth.z + math.sin(moonangle) * moonradius
+    moonradius = 5
+    moon.ob.rotation_y += time.dt * 7
+    moon.ob.position = orbit(moonangle, moonradius, earth.ob)
 
-    
     marsangle += speed * 0.9 * time.dt
-    marsradius = 25
-    mars.rotation_y += time.dt * 14
-    mars.x = math.cos(marsangle) * marsradius
-    mars.z = math.sin(marsangle) * marsradius
-
-
+    marsradius = 500
+    mars.ob.rotation_y += time.dt * 14
+    mars.ob.position  = orbit(marsangle, marsradius, sun)
 
 def input(key):
+    global platar
     if key == '1':
-        ec.position = earth.position
+        platar = 1
     elif key == "2":
-        #ec.position = mars.position
-        pass
-        
-        
-ec.position = earth.position
-app.run()
+        platar = 2
+    elif key == "0":
+        platar = 0
 
+def orbit(angle, radius, target):
+    return target.position + Vec3(math.cos(angle) * radius, 0, math.sin(angle) * radius)
+
+app.run()
