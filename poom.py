@@ -11,7 +11,7 @@ window.color = color.black
 #vars
 
 speed = 1
-platar = 1
+platar = 0
 
 ec = EditorCamera()
 
@@ -32,9 +32,13 @@ class planet:
         self.orbtarget = orbtarget
         self.orbspeed = orbspeed
     def planorbit(self):
-        self.planetangle += self.orbspeed * time.dt
-        self.ob.rotation_y += time.dt * self.rospeed
-        self.ob.position = orbit(self.planetangle, self.planetradius, self.orbtarget)
+        if self.orbtarget:
+            self.planetangle += self.orbspeed * time.dt
+            self.ob.rotation_y += time.dt * self.rospeed
+            self.ob.position = orbit(self.planetangle, self.planetradius, self.orbtarget)
+        else:
+            self.ob.position += self.velocity * time.dt
+            self.ob.rotation_y += time.dt * self.rospeed
 
 
 # define planets
@@ -54,9 +58,12 @@ def update():
     elif platar == 2:
         target_pos = mars.ob.position
     elif platar == 0:
-        target_pos = sun.position
+        if sun:
+            target_pos = sun.position
+        else:
+            target_pos = (0,0,0)
 
-    ec.position = lerp(ec.position, target_pos, 0.3)
+    ec.position = lerp(ec.position, target_pos, 0.5)
 
     sun.rotation_y += time.dt * 3
 
@@ -80,4 +87,9 @@ def input(key):
 def orbit(angle, radius, target):
     return target.position + Vec3(math.cos(angle) * radius, 0, math.sin(angle) * radius)
 
+def destroysun():
+    destroy(sun)
+
+
+sun.on_click = destroysun
 app.run()
