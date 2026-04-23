@@ -15,6 +15,7 @@ platar = 1
 
 ec = EditorCamera()
 
+#planet class
 class planet:
     def __init__(self, name, age, texture, scale, pos, rad, orbtarget, rospeed, orbspeed):
         self.name = name
