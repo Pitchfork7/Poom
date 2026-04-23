@@ -34,10 +34,10 @@ class planet:
 
 
 # planets
-earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0), 300, sun.ob, 15)
+earth = planet("Earth", 4.54, "textures/earth.png", 2, (0,0,0), 300, sun, 15)
 moon = planet("Moon", 4.54, "textures/moon .png", 0.54, (0,0,0), 5, earth.ob, 5)
 sun = Entity(model='cube', texture='textures/sun.png', scale=109, collider='box', position=(0,0,0))
-mars = planet("Mars", 4.54, "textures/mars.png", 1, (0,0,0), 500, sun.ob, 14)
+mars = planet("Mars", 4.54, "textures/mars.png", 1, (0,0,0), 500, sun, 14)
 
 earthangle = 0
 moonangle = 0
@@ -56,21 +56,10 @@ def update():
 
     sun.rotation_y += time.dt * 3
 
-    # earth
-    earthangle += speed * time.dt
-    earthradius = 300
-    earth.ob.rotation_y += time.dt * 15
-    earth.ob.position = orbit(earthangle, earthradius, sun)
-
-    moonangle += speed * time.dt
-    moonradius = 5
-    moon.ob.rotation_y += time.dt * 7
-    moon.ob.position = orbit(moonangle, moonradius, earth.ob)
-
-    marsangle += speed * 0.9 * time.dt
-    marsradius = 500
-    mars.ob.rotation_y += time.dt * 14
-    mars.ob.position  = orbit(marsangle, marsradius, sun)
+    # orbits
+    earth.planorbit()
+    moon.planorbit()
+    mars.planorbit()
 
 def input(key):
     global platar
